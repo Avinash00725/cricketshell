@@ -1,7 +1,6 @@
 package src;
 
 import java.io.*;
-import java.util.Arrays;
 
 public class ScriptRunner {
     public static void runScript(String[] args, ShellState shell) {
@@ -14,7 +13,6 @@ public class ScriptRunner {
             System.out.println("script not found: " + args[0]);
             return;
         }
-
         try (BufferedReader br = new BufferedReader(new FileReader(script))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -23,6 +21,8 @@ public class ScriptRunner {
             }
         } catch (IOException e) {
             System.out.println("error reading script: " + e.getMessage());
+        } catch (InterruptedException e) {
+            System.out.println("script execution interrupted: " + e.getMessage());
         }
     }
 }
